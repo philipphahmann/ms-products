@@ -1,10 +1,10 @@
 package br.com.postech.soat.product.infrastructure.persistence.specification;
 
-import br.com.postech.soat.product.infrastructure.persistence.entities.ProductEntity;
 import br.com.postech.soat.product.application.dto.FindProductQuery;
 import br.com.postech.soat.product.domain.enumtypes.Category;
-import org.springframework.data.jpa.domain.Specification;
+import br.com.postech.soat.product.infrastructure.persistence.entities.ProductEntity;
 import java.util.Optional;
+import org.springframework.data.jpa.domain.Specification;
 
 public class ProductSpecification {
 

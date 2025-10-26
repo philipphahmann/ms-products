@@ -2,14 +2,14 @@ package br.com.postech.soat.product.domain.entity;
 
 import br.com.postech.soat.commons.domain.AggregateRoot;
 import br.com.postech.soat.product.domain.enumtypes.Category;
-import java.math.BigDecimal;
-import java.util.UUID;
 import br.com.postech.soat.product.domain.valueobject.ProductCategory;
 import br.com.postech.soat.product.domain.valueobject.ProductDescription;
 import br.com.postech.soat.product.domain.valueobject.ProductImage;
 import br.com.postech.soat.product.domain.valueobject.ProductName;
 import br.com.postech.soat.product.domain.valueobject.ProductPrice;
 import br.com.postech.soat.product.domain.valueobject.ProductSKU;
+import java.math.BigDecimal;
+import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 

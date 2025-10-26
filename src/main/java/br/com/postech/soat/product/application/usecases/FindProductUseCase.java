@@ -1,12 +1,12 @@
 package br.com.postech.soat.product.application.usecases;
 
 import br.com.postech.soat.commons.infrastructure.aop.monitorable.Monitorable;
-import br.com.postech.soat.product.application.dto.FindProductQuery;
-import br.com.postech.soat.product.domain.entity.Product;
 import br.com.postech.soat.product.application.adapters.LoggerPort;
+import br.com.postech.soat.product.application.dto.FindProductQuery;
 import br.com.postech.soat.product.application.repositories.ProductRepository;
-import org.springframework.stereotype.Service;
+import br.com.postech.soat.product.domain.entity.Product;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 
 @Service

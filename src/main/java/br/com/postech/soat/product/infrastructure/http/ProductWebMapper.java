@@ -2,14 +2,13 @@ package br.com.postech.soat.product.infrastructure.http;
 
 import br.com.postech.soat.openapi.model.GetProduct200ResponseInnerDto;
 import br.com.postech.soat.openapi.model.PostProducts201ResponseDto;
+import br.com.postech.soat.openapi.model.PostProductsRequestDto;
 import br.com.postech.soat.openapi.model.ProductDto;
+import br.com.postech.soat.openapi.model.PutProductsRequestDto;
 import br.com.postech.soat.product.application.dto.CreateProductDto;
 import br.com.postech.soat.product.application.dto.UpdateProductDto;
-import br.com.postech.soat.openapi.model.PostProductsRequestDto;
-import br.com.postech.soat.openapi.model.PutProductsRequestDto;
-import java.util.List;
 import br.com.postech.soat.product.domain.entity.Product;
-
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

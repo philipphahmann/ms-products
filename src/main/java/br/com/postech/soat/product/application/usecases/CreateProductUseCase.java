@@ -2,7 +2,9 @@ package br.com.postech.soat.product.application.usecases;
 
 import br.com.postech.soat.commons.infrastructure.aop.monitorable.Monitorable;
 import br.com.postech.soat.commons.infrastructure.exception.ResourceConflictException;
+import br.com.postech.soat.product.application.adapters.LoggerPort;
 import br.com.postech.soat.product.application.dto.CreateProductDto;
+import br.com.postech.soat.product.application.repositories.ProductRepository;
 import br.com.postech.soat.product.domain.entity.Product;
 import br.com.postech.soat.product.domain.valueobject.ProductCategory;
 import br.com.postech.soat.product.domain.valueobject.ProductDescription;
@@ -10,8 +12,6 @@ import br.com.postech.soat.product.domain.valueobject.ProductImage;
 import br.com.postech.soat.product.domain.valueobject.ProductName;
 import br.com.postech.soat.product.domain.valueobject.ProductPrice;
 import br.com.postech.soat.product.domain.valueobject.ProductSKU;
-import br.com.postech.soat.product.application.adapters.LoggerPort;
-import br.com.postech.soat.product.application.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 @Service

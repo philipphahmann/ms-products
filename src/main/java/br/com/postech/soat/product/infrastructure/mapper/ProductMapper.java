@@ -1,7 +1,7 @@
 package br.com.postech.soat.product.infrastructure.mapper;
 
-import br.com.postech.soat.product.infrastructure.persistence.entities.ProductEntity;
 import br.com.postech.soat.product.domain.entity.Product;
+import br.com.postech.soat.product.infrastructure.persistence.entities.ProductEntity;
 
 public interface ProductMapper {
 

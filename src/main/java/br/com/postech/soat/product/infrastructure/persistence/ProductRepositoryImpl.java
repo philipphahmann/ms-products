@@ -1,14 +1,14 @@
 package br.com.postech.soat.product.infrastructure.persistence;
 
 import br.com.postech.soat.commons.infrastructure.aop.monitorable.Monitorable;
+import br.com.postech.soat.product.application.dto.FindProductQuery;
+import br.com.postech.soat.product.application.repositories.ProductRepository;
+import br.com.postech.soat.product.domain.entity.Product;
+import br.com.postech.soat.product.domain.entity.ProductId;
 import br.com.postech.soat.product.infrastructure.mapper.ProductMapper;
 import br.com.postech.soat.product.infrastructure.persistence.entities.ProductEntity;
 import br.com.postech.soat.product.infrastructure.persistence.entities.repositories.ProductJpaRepository;
 import br.com.postech.soat.product.infrastructure.persistence.specification.ProductSpecification;
-import br.com.postech.soat.product.application.dto.FindProductQuery;
-import br.com.postech.soat.product.domain.entity.Product;
-import br.com.postech.soat.product.domain.entity.ProductId;
-import br.com.postech.soat.product.application.repositories.ProductRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
