@@ -89,6 +89,43 @@ paths:
                 errors:
                   - Erro ao tentar salvar o produto no banco de dados.
   /products/{productId}:
+    get:
+      tags:
+        - Product
+      summary: Buscar um produto por ID
+      description: Retorna os detalhes de um produto específico com base no seu `productId`.
+      operationId: getProductById
+      parameters:
+        - name: productId
+          in: path
+          description: ID único do produto a ser buscado.
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+      responses:
+        '200':
+          description: Produto encontrado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Produto não encontrado com o ID fornecido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 404
+                message: Not Found
+                errors:
+                  - Product not found with ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        '500':
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
         - Product
@@ -271,7 +308,7 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/Product' # Referencia o schema Product
+              $ref: '#/components/schemas/Product'
     CreateProductResponse:
       description: Resposta após a criação bem-sucedida de um produto.
       content:
@@ -305,9 +342,6 @@ components:
       title: UUID
       description: Identificador único universal no formato UUID.
       format: uuid
-      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-      minLength: 36
-      maxLength: 36
       example: "241fae7b-0210-4d29-a928-90653c9a9a89"
     Money:
       type: number
@@ -326,7 +360,7 @@ components:
         - DESSERT
         - SIDE_DISH
       example: SNACK
-    Product: # Schema reutilizável para o produto
+    Product:
       type: object
       title: Product
       description: Representa um produto do catálogo.

@@ -11,7 +11,7 @@ CREATE TABLE products
     description VARCHAR(255) NOT NULL,
     price       NUMERIC(18, 4) NOT NULL CHECK (price > 0),
     active      BOOLEAN DEFAULT TRUE,
-    image       VARCHAR(255),
+    image       VARCHAR(255) NOT NULL,
     created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at  TIMESTAMPTZ
 );

@@ -28,7 +28,7 @@ public interface ProductWebMapper {
     @Mapping(target = "active", source = "product.active")
     @Mapping(target = "image", source = "product.image.value")
     @Mapping(target = "category", source = "product.category.value")
-    ProductDto toUpdateResponse(Product product);
+    ProductDto toResponse(Product product);
 
     List<ProductDto> toListResponse(List<Product> products);
 }
