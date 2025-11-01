@@ -1,15 +1,15 @@
-package br.com.postech.soat.product.adapters.in;
+package br.com.postech.soat.adapters.in;
 
-import br.com.postech.soat.openapi.model.GetProduct200ResponseInnerDto;
+import br.com.postech.soat.openapi.model.ProductDto;
 import br.com.postech.soat.openapi.model.ProductCategoryDto;
-import br.com.postech.soat.product.infrastructure.http.ProductController;
-import br.com.postech.soat.product.infrastructure.http.ProductWebMapper;
-import br.com.postech.soat.product.infrastructure.LoggerAdapter;
-import br.com.postech.soat.product.application.repositories.ProductRepository;
-import br.com.postech.soat.product.application.usecases.FindProductUseCase;
-import br.com.postech.soat.product.application.dto.FindProductQuery;
-import br.com.postech.soat.product.domain.enumtypes.Category;
-import br.com.postech.soat.product.domain.entity.Product;
+import br.com.postech.soat.infrastructure.http.ProductController;
+import br.com.postech.soat.infrastructure.http.ProductWebMapper;
+import br.com.postech.soat.infrastructure.LoggerAdapter;
+import br.com.postech.soat.application.repositories.ProductRepository;
+import br.com.postech.soat.application.usecases.FindProductUseCase;
+import br.com.postech.soat.application.dto.FindProductQuery;
+import br.com.postech.soat.domain.enumtypes.Category;
+import br.com.postech.soat.domain.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -64,7 +64,7 @@ class ProductControllerTest {
                 .active(true)
                 .build();
 
-        GetProduct200ResponseInnerDto responseDto = new GetProduct200ResponseInnerDto()
+        ProductDto responseDto = new ProductDto()
                 .id(product.getId().getValue())
                 .name(product.getName().value())
                 .sku(product.getSku().value())
@@ -83,15 +83,15 @@ class ProductControllerTest {
     @Test
     void getProduct_whenCategoryAndSkuProvided_shouldReturnOk() {
         String sku = "Test SKU";
-        String category = "DRINK";
+        ProductCategoryDto categoryDto = ProductCategoryDto.fromValue("DRINK");
 
-        ResponseEntity<List<GetProduct200ResponseInnerDto>> response = productController.getProduct(sku, category);
+        ResponseEntity<List<ProductDto>> response = productController.getProduct(sku, categoryDto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(1, response.getBody().size());
 
-        GetProduct200ResponseInnerDto responseDto = response.getBody().get(0);
+        ProductDto responseDto = response.getBody().get(0);
         assertEquals(product.getId().getValue(), responseDto.getId());
         assertEquals(product.getName().value(), responseDto.getName());
         assertEquals(product.getSku().value(), responseDto.getSku());
@@ -104,15 +104,15 @@ class ProductControllerTest {
 
     @Test
     void getProduct_whenOnlyCategoryProvided_shouldReturnOk() {
-        String category = "DRINK";
+        ProductCategoryDto categoryDto = ProductCategoryDto.fromValue("DRINK");
 
-        ResponseEntity<List<GetProduct200ResponseInnerDto>> response = productController.getProduct(null, category);
+        ResponseEntity<List<ProductDto>> response = productController.getProduct(null, categoryDto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(1, response.getBody().size());
 
-        GetProduct200ResponseInnerDto responseDto = response.getBody().get(0);
+        ProductDto responseDto = response.getBody().get(0);
         assertEquals(product.getId().getValue(), responseDto.getId());
         assertEquals(product.getName().value(), responseDto.getName());
         assertEquals(product.getSku().value(), responseDto.getSku());
@@ -126,15 +126,15 @@ class ProductControllerTest {
     @Test
     void getProduct_whenOnlySkuProvided_shouldReturnOk() {
         String sku = "Test SKU";
-        String category = "DRINK";
+        ProductCategoryDto categoryDto = ProductCategoryDto.fromValue("DRINK");
 
-        ResponseEntity<List<GetProduct200ResponseInnerDto>> response = productController.getProduct(sku, category);
+        ResponseEntity<List<ProductDto>> response = productController.getProduct(sku, categoryDto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(1, response.getBody().size());
 
-        GetProduct200ResponseInnerDto responseDto = response.getBody().get(0);
+        ProductDto responseDto = response.getBody().get(0);
         assertEquals(product.getId().getValue(), responseDto.getId());
         assertEquals(product.getName().value(), responseDto.getName());
         assertEquals(product.getSku().value(), responseDto.getSku());
@@ -147,15 +147,15 @@ class ProductControllerTest {
 
     @Test
     void getProduct_whenNoFilterProvided_shouldReturnOk() {
-        String category = "DRINK";
+        ProductCategoryDto categoryDto = ProductCategoryDto.fromValue("DRINK");
 
-        ResponseEntity<List<GetProduct200ResponseInnerDto>> response = productController.getProduct(null, category);
+        ResponseEntity<List<ProductDto>> response = productController.getProduct(null, categoryDto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(1, response.getBody().size());
 
-        GetProduct200ResponseInnerDto responseDto = response.getBody().get(0);
+        ProductDto responseDto = response.getBody().get(0);
         assertEquals(product.getId().getValue(), responseDto.getId());
         assertEquals(product.getName().value(), responseDto.getName());
         assertEquals(product.getSku().value(), responseDto.getSku());
@@ -169,7 +169,7 @@ class ProductControllerTest {
     @Test
     void getProduct_whenNoProductsFound_shouldReturnOkWithEmptyList() {
         String sku = "NonExistentSKU";
-        String category = "DRINK";
+        ProductCategoryDto categoryDto = ProductCategoryDto.fromValue("DRINK");
 
         when(productRepository.findAll(any(FindProductQuery.class))).thenReturn(Collections.emptyList());
         when(findProductUseCase.execute(any(FindProductQuery.class)))
@@ -177,7 +177,7 @@ class ProductControllerTest {
         when(productWebMapper.toListResponse(Collections.emptyList()))
                 .thenReturn(Collections.emptyList());
 
-        ResponseEntity<List<GetProduct200ResponseInnerDto>> response = productController.getProduct(sku, category);
+        ResponseEntity<List<ProductDto>> response = productController.getProduct(sku, categoryDto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());

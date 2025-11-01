@@ -26,7 +26,7 @@ paths:
         - $ref: '#/components/parameters/CategoryParam'
       responses:
         '200':
-          $ref: '#/components/responses/ProductListResponse'
+          $ref: '#/components/responses/ProductListResponse' # Esta resposta agora usa $ref para Product
         '400':
           description: Requisição inválida (categoria inválida)
           content:
@@ -39,7 +39,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              example: # Exemplo CORRIGIDO para 500
+              example:
                 status: 500
                 message: Internal Server Error
                 errors:
@@ -63,7 +63,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              example: # Exemplo para 400
+              example:
                 status: 400
                 message: Bad Request
                 errors:
@@ -85,7 +85,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              example: # Exemplo CORRIGIDO para 500
+              example:
                 status: 500
                 message: Internal Server Error
                 errors:
@@ -117,7 +117,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              example: # Exemplo para 400
+              example:
                 status: 400
                 message: Bad Request
                 errors:
@@ -139,7 +139,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              example: # Exemplo CORRIGIDO para 500
+              example:
                 status: 500
                 message: Internal Server Error
                 errors:
@@ -181,7 +181,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              example: # Exemplo CORRIGIDO para 500
+              example:
                 status: 500
                 message: Internal Server Error
                 errors:
@@ -279,7 +279,7 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/Product'
+              $ref: '#/components/schemas/Product' # Referencia o schema Product
     CreateProductResponse:
       description: Resposta após a criação bem-sucedida de um produto.
       content:
@@ -300,7 +300,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Product'
+            $ref: '#/components/schemas/Product' # Referencia o schema Product
     ErrorResponse:
       description: Resposta padrão para erros.
       content:
@@ -334,7 +334,7 @@ components:
         - DESSERT
         - SIDE_DISH
       example: SNACK
-    Product:
+    Product: # Schema reutilizável para o produto
       type: object
       title: Product
       description: Representa um produto do catálogo.
@@ -384,11 +384,11 @@ components:
         status:
           type: integer
           description: Código de status HTTP.
-          example: 400 # Exemplo genérico, pode ser 400, 404, 409, 500 etc.
+          example: 400
         message:
           type: string
           description: Mensagem geral sobre o erro.
-          example: "Bad Request" # Exemplo genérico
+          example: "Bad Request"
         errors:
           type: array
           description: Lista de mensagens de erro específicas.
