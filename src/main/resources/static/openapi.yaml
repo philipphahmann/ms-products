@@ -44,8 +44,6 @@ paths:
                 message: Internal Server Error
                 errors:
                   - Ocorreu um erro inesperado ao processar sua solicitação.
-      security:
-        - bearerAuth: []
     post:
       tags:
         - Product
@@ -90,8 +88,6 @@ paths:
                 message: Internal Server Error
                 errors:
                   - Erro ao tentar salvar o produto no banco de dados.
-      security:
-        - bearerAuth: []
   /products/{productId}:
     put:
       tags:
@@ -144,8 +140,6 @@ paths:
                 message: Internal Server Error
                 errors:
                   - Falha ao atualizar o produto. Tente novamente mais tarde.
-      security:
-        - bearerAuth: []
     delete:
       tags:
         - Product
@@ -186,8 +180,6 @@ paths:
                 message: Internal Server Error
                 errors:
                   - Erro ao tentar inativar o produto.
-      security:
-        - bearerAuth: []
 tags:
   - name: Product
     description: Operações relacionadas ao gerenciamento de produtos
@@ -399,9 +391,3 @@ components:
         - status
         - message
         - errors
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: "Autenticação via token JWT Bearer. Obtenha o token via endpoint de login (em outro serviço)."

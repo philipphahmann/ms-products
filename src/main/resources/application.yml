@@ -36,12 +36,6 @@ springdoc:
     filter: true
     persist-authorization: true
 
-security:
-  jwt:
-    jwks-uri: ${SECURITY_JWT_JWKS_URI:http://localhost:8080/.well-known/jwks.json}
-    audience: ${SECURITY_JWT_AUDIENCE:fast-food-api}
-    algorithm: ${SECURITY_JWT_ALGORITHM:RS256}
-
 management:
   endpoints:
     web:
