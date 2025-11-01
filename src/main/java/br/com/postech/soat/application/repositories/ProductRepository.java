@@ -14,11 +14,11 @@ public interface ProductRepository {
 
     Optional<Product> findById(UUID id);
 
-    Optional<Product> findById(ProductId id);
+//    Optional<Product> findById(ProductId id);
 
     boolean existsById(UUID uuid);
 
-    boolean existsById(ProductId id);
+//    boolean existsById(ProductId id);
 
     boolean existsBySku(String sku);
 }
