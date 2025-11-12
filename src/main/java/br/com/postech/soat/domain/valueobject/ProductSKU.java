@@ -1,7 +1,7 @@
 package br.com.postech.soat.domain.valueobject;
 
 
-import br.com.postech.soat.domain.exception.InvalidSKUException;
+import br.com.postech.soat.domain.exception.InvalidProductSKUException;
 
 public record ProductSKU(String value) {
     public ProductSKU {
@@ -10,11 +10,11 @@ public record ProductSKU(String value) {
 
     private void validate(String value) {
         if (value == null || value.trim().isEmpty()) {
-            throw new InvalidSKUException("SKU não pode ser nulo");
+            throw new InvalidProductSKUException("SKU não pode ser nulo");
         }
 
         if (value.length() > 16) {
-            throw new InvalidSKUException("SKU não pode conter mais de 16 caracteres");
+            throw new InvalidProductSKUException("SKU não pode conter mais de 16 caracteres");
         }
     }
 }

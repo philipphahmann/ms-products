@@ -14,13 +14,13 @@ public class LoggerAdapter implements LoggerPort {
         logger.info(message);
     }
 
-    @Override
-    public void warn(String message) {
-        logger.warn(message);
-    }
+//    @Override
+//    public void warn(String message) {
+//        logger.warn(message);
+//    }
 
-    @Override
-    public void error(String message) {
-        logger.error(message);
-    }
+//    @Override
+//    public void error(String message) {
+//        logger.error(message);
+//    }
 }

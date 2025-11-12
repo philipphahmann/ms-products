@@ -48,9 +48,7 @@ public class ProductController implements ProductApi {
     }
 
     @Override
-    public ResponseEntity<List<ProductDto>> getProduct(
-            @RequestParam(value = "sku", required = false) String sku,
-            @RequestParam(value = "category", required = false) ProductCategoryDto categoryDto) {
+    public ResponseEntity<List<ProductDto>> getProduct(String sku, ProductCategoryDto categoryDto) {
 
         String categoryString = null;
         if (categoryDto != null) { categoryString = categoryDto.getValue(); }
@@ -62,9 +60,7 @@ public class ProductController implements ProductApi {
 
     @Override
     public ResponseEntity<ProductDto> getProductById(@PathVariable("productId") UUID productId) {
-
         Product product = findProductByIdUseCase.execute(productId);
-
         return ResponseEntity.ok(productWebMapper.toResponse(product));
     }
 

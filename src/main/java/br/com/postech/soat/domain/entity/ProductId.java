@@ -16,8 +16,4 @@ public class ProductId extends Identifier {
     public static ProductId of(UUID value) {
         return new ProductId(value);
     }
-
-    public static ProductId of(String value) {
-        return new ProductId(UUID.fromString(value));
-    }
 }

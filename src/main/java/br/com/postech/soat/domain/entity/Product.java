@@ -53,10 +53,6 @@ public class Product extends AggregateRoot<ProductId> {
         return product;
     }
 
-    public void activate() {
-        this.active = true;
-    }
-
     public void deactivate() {
         this.active = false;
     }

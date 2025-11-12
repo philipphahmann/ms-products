@@ -44,20 +44,6 @@ public class ProductRepositoryImpl implements ProductRepository {
             .map(ProductMapper::toDomain);
     }
 
-//    @Override
-//    public Optional<Product> findById(ProductId id) {
-//        return findById(id.getValue());
-//    }
-
-    @Override
-    public boolean existsById(UUID uuid) {
-        return jpaRepository.existsById(uuid);
-    }
-
-//    @Override
-//    public boolean existsById(ProductId id) {
-//        return existsById(id.getValue());
-//    }
 
     @Override
     public boolean existsBySku(String sku) {

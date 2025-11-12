@@ -2,8 +2,8 @@ package br.com.postech.soat.domain.exception;
 
 import br.com.postech.soat.commons.infrastructure.exception.BaseException;
 
-public class InvalidSKUException extends BaseException {
-    public InvalidSKUException(String message) {
+public class InvalidProductSKUException extends BaseException {
+    public InvalidProductSKUException(String message) {
         super(message);
     }
 }
