@@ -14,7 +14,7 @@ on:
 jobs:
   # --- JOB 1: Build, Teste e PMD (CI Rápido) ---
   build_and_test:
-    name: Build, Teste e Análise PMD
+    name: Build e Teste
     runs-on: ubuntu-latest
     steps:
       - name: 1. Checkout do Código
@@ -30,7 +30,7 @@ jobs:
       - name: 3. Dar Permissão de Execução ao mvnw
         run: chmod +x ./mvnw
 
-      - name: 4. Executar Build, Testes, Cobertura e PMD
+      - name: 4. Executar Build, Testes e Cobertura
         run: ./mvnw -B clean verify
 
       - name: 5. Fazer Upload do Relatório de Cobertura
@@ -70,13 +70,10 @@ jobs:
           path: target/site/jacoco/
 
       - name: 4. SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -B sonar:sonar
 
   # --- JOB 3: Build e Push para ECR (CD) ---
   build_and_push_ecr:
