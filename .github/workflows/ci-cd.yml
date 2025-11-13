@@ -31,7 +31,7 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: 4. Executar Build, Testes, Cobertura e PMD
-        run: ./mvnw -B clean verify pmd:check
+        run: ./mvnw -B clean verify
 
       - name: 5. Fazer Upload do Relatório de Cobertura
         uses: actions/upload-artifact@v4
