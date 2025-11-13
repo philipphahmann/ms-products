@@ -42,11 +42,11 @@ public class EventStoreJpa implements EventStore {
         }
     }
 
-    private int getCurrentVersion(Identifier aggregateId) {
-        String jpql = "SELECT MAX(e.version) FROM EventEntity e WHERE e.aggregateId = :aggregateId";
-        Integer version = em.createQuery(jpql, Integer.class)
-            .setParameter("aggregateId", aggregateId.getValue())
-            .getSingleResult();
-        return version != null ? version : 0;
-    }
+//    private int getCurrentVersion(Identifier aggregateId) {
+//        String jpql = "SELECT MAX(e.version) FROM EventEntity e WHERE e.aggregateId = :aggregateId";
+//        Integer version = em.createQuery(jpql, Integer.class)
+//            .setParameter("aggregateId", aggregateId.getValue())
+//            .getSingleResult();
+//        return version != null ? version : 0;
+//    }
 }

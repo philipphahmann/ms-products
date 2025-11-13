@@ -4,7 +4,6 @@ import br.com.postech.soat.commons.infrastructure.aop.monitorable.Monitorable;
 import br.com.postech.soat.application.dto.FindProductQuery;
 import br.com.postech.soat.application.repositories.ProductRepository;
 import br.com.postech.soat.domain.entity.Product;
-import br.com.postech.soat.domain.entity.ProductId;
 import br.com.postech.soat.infrastructure.mapper.ProductMapper;
 import br.com.postech.soat.infrastructure.persistence.entities.ProductEntity;
 import br.com.postech.soat.infrastructure.persistence.entities.repositories.ProductJpaRepository;

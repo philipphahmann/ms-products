@@ -9,7 +9,8 @@ public enum Category {
     SIDE_DISH;
 
     public static Category entryOf(String category) {
-        return Arrays.stream(Category.values()).map(Category::name)
+        return Arrays.stream(values())
+            .map(Category::name)
             .filter(name -> name.equalsIgnoreCase(category))
             .findFirst()
             .map(Category::valueOf)

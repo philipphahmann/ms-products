@@ -41,7 +41,7 @@ public class CreateProductUseCase {
         logger.info("Domain product created: " + product.getSku());
 
         return productRepository.save(product);
-    };
+    }
 
     private void validateSkuDoesNotExist(ProductSKU sku, ProductRepository productRepository){
         boolean exists = productRepository.existsBySku(sku.value());

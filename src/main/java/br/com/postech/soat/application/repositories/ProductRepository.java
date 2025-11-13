@@ -2,7 +2,6 @@ package br.com.postech.soat.application.repositories;
 
 import br.com.postech.soat.application.dto.FindProductQuery;
 import br.com.postech.soat.domain.entity.Product;
-import br.com.postech.soat.domain.entity.ProductId;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
