@@ -221,23 +221,35 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.28.0</version>
                 <configuration>
                     <rulesets>
+                        <ruleset>/rulesets/java/basic.xml</ruleset>
+                        <ruleset>/rulesets/java/cleancode.xml</ruleset>
+                        <ruleset>/rulesets/java/design.xml</ruleset>
+                        <ruleset>/rulesets/java/unusedcode.xml</ruleset>
                     </rulesets>
-
                     <excludes>
                         <exclude>br/com/postech/soat/openapi/**</exclude>
                     </excludes>
-                    <failOnViolation>true</failOnViolation>
+
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding> <sourceVersion>${java.version}</sourceVersion> <failOnViolation>true</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>
                     <includeTests>true</includeTests>
-                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                    <targetJdk>${java.version}</targetJdk>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>pmd-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
