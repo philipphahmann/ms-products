@@ -4,7 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 infra/**/*.zip
-infra/.localstack/
+k8s/.localstack/
 node_modules/
 /src/main/resources/sra/**
 
