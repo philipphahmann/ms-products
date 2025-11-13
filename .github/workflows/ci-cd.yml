@@ -27,10 +27,13 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: 3. Executar Build, Testes, Cobertura e PMD
+      - name: 3. Dar Permissão de Execução ao mvnw
+        run: chmod +x ./mvnw
+
+      - name: 4. Executar Build, Testes, Cobertura e PMD
         run: ./mvnw -B clean verify pmd:check
 
-      - name: 4. Fazer Upload do Relatório de Cobertura
+      - name: 5. Fazer Upload do Relatório de Cobertura
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
