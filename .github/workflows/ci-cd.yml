@@ -107,7 +107,7 @@ jobs:
           aws-region: us-east-1
 
       - name: 3. Configurar Contexto Kubectl do EKS
-        uses: aws-actions/amazon-eks-set-context@v1
+        uses: aws-actions/amazon-eks-cluster-context@v1
         with:
           cluster-name: soat-infra-eks
 
@@ -119,8 +119,8 @@ jobs:
       - name: 5. Aplicar o Deploy no EKS (com envsubst)
         env:
           K8S_IMAGE_TAG: ${{ needs.build_and_push_ecr.outputs.image_uri_digest }}
-          DB_USER_B64: ${{ secrets.DB_USER_B64 }} # Espera o usuário do DB em Base64
-          DB_PASS_B64: ${{ secrets.DB_PASS_B64 }} # Espera a senha do DB em Base64
+          DB_USER_B64: ${{ secrets.DB_USER_B64 }}
+          DB_PASS_B64: ${{ secrets.DB_PASS_B64 }}
         run: |
           kubectl apply -f k8s/namespace.yml
           envsubst < k8s/secrets/products-db-secret.yml | sponge k8s/secrets/products-db-secret.yml
