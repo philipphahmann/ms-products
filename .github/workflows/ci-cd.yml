@@ -1,4 +1,4 @@
-name: CI/CD do Serviço de Produtos
+name: CI/CD do Microsserviço de Produtos
 
 on:
   push:
