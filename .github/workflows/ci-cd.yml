@@ -42,10 +42,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          ./mvnw -B verify sonar:sonar
-          -Dsonar.scanner.metadataFilePath=${{ github.workspace }}/target/sonar/sonar-report.json
-          -Dsonar.qualitygate.wait=true
+        run: ./mvnw -B verify sonar:sonar -Dsonar.scanner.metadataFilePath=${{ github.workspace }}/target/sonar/sonar-report.json -Dsonar.qualitygate.wait=true
 
       - name: 6. Fazer Upload do Relatório Sonar (para o Quality Gate)
         uses: actions/upload-artifact@v4
