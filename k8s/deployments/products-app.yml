@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ms-products # Nome do container
-          image: $K8S_IMAGE_TAG
+          image: ${K8S_IMAGE_TAG}
           imagePullPolicy: Always # Sempre baixa a imagem mais recente
           ports:
             - containerPort: 8080
