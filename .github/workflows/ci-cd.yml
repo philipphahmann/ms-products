@@ -88,7 +88,7 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
       - name: 2. Configurar Kubectl para EKS
-        uses: aws-actions/configure-aws-kubectl@v1
+        uses: aws-actions/configure-kubectl@v1
         with:
           cluster-name: soat-infra-eks
       - name: 3. Aplicar o Deploy no EKS
