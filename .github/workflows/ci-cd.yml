@@ -71,7 +71,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ steps.login-ecr.outputs.registry }}/SEU-REPO-ECR:${{ github.sha }}
+          tags: ${{ steps.login-ecr.outputs.registry }}/190375108757.dkr.ecr.us-east-1.amazonaws.com/soat-repo:${{ github.sha }}
           outputs: type=image
 
   deploy_to_eks:
