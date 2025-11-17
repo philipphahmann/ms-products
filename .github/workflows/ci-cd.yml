@@ -121,9 +121,15 @@ jobs:
           DB_USER_B64: ${{ secrets.DB_USER_B64 }}
           DB_PASS_B64: ${{ secrets.DB_PASS_B64 }}
         run: |
+          set -e
+          
+          echo "Iniciando deploy da imagem: $K8S_IMAGE_TAG"
+          
           kubectl apply -f k8s/namespace.yml
+          
           envsubst < k8s/secrets/products-db.yml | sponge k8s/secrets/products-db.yml
           envsubst < k8s/secrets/products-app.yml | sponge k8s/secrets/products-app.yml
           envsubst < k8s/deployments/products-app.yml | sponge k8s/deployments/products-app.yml
+          
           echo "Aplicando Kustomization (todos os manifestos)..."
           kubectl apply -k k8s/
