@@ -42,7 +42,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./mvnw -B verify sonar:sonar -Dsonar.scanner.metadataFilePath=${{ github.workspace }}/target/sonar/sonar-report.json
+        run: |
+          ./mvnw -B verify sonar:sonar
+          -Dsonar.scanner.metadataFilePath=${{ github.workspace }}/target/sonar/sonar-report.json
+          -Dsonar.qualitygate.wait=true
 
       - name: 6. Fazer Upload do Relatório Sonar (para o Quality Gate)
         uses: actions/upload-artifact@v4
@@ -50,35 +53,10 @@ jobs:
           name: sonar-report
           path: target/sonar/sonar-report.json
 
-  sonar_quality_gate:
-    name: SonarCloud Quality Gate
-    runs-on: ubuntu-latest
-    needs: build_test_and_analyze
-
-    if: |
-      github.event_name == 'pull_request' ||
-      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
-      github.event_name == 'workflow_dispatch'
-
-    steps:
-      - name: 1. Download do Relatório Sonar
-        uses: actions/download-artifact@v4
-        with:
-          name: sonar-report
-          path: target/sonar/
-
-      - name: 2. Verificar o Quality Gate do SonarCloud
-        uses: sonarsource/sonar-quality-gate-action@master
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          scanMetadataReportFile: target/sonar/sonar-report.json
-
   build_and_push_ecr:
     name: Build e Push da Imagem Docker para ECR
     runs-on: ubuntu-latest
-    needs: sonar_quality_gate
+    needs: build_test_and_analyze
 
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -147,16 +125,9 @@ jobs:
           DB_USER_B64: ${{ secrets.DB_USER_B64 }} # Espera o usuário do DB em Base64
           DB_PASS_B64: ${{ secrets.DB_PASS_B64 }} # Espera a senha do DB em Base64
         run: |
-          # Define o namespace
           kubectl apply -f k8s/namespace.yml
-          
-          # Substitui as variáveis nos secrets
-          envsubst < k8s/secrets/products-db.yml | sponge k8s/secrets/products-db.yml
-          envsubst < k8s/secrets/products-app.yml | sponge k8s/secrets/products-app.yml
-          
-          # Substitui a tag da imagem no deployment
-          envsubst < k8s/deployments/products-app.yml | sponge k8s/deployments/products-app-deployment.yml
-          
-          # Aplica todos os manifestos
+          envsubst < k8s/secrets/products-db-secret.yml | sponge k8s/secrets/products-db-secret.yml
+          envsubst < k8s/secrets/products-app-secret.yml | sponge k8s/secrets/products-app-secret.yml
+          envsubst < k8s/deployments/products-app-deployment.yml | sponge k8s/deployments/products-app-deployment.yml
           echo "Aplicando Kustomization (todos os manifestos)..."
           kubectl apply -k k8s/
