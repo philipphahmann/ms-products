@@ -122,8 +122,8 @@ jobs:
           DB_PASS_B64: ${{ secrets.DB_PASS_B64 }}
         run: |
           kubectl apply -f k8s/namespace.yml
-          envsubst < k8s/secrets/products-db-secret.yml | sponge k8s/secrets/products-db-secret.yml
-          envsubst < k8s/secrets/products-app-secret.yml | sponge k8s/secrets/products-app-secret.yml
-          envsubst < k8s/deployments/products-app-deployment.yml | sponge k8s/deployments/products-app-deployment.yml
+          envsubst < k8s/secrets/products-db.yml | sponge k8s/secrets/products-db.yml
+          envsubst < k8s/secrets/products-app.yml | sponge k8s/secrets/products-app.yml
+          envsubst < k8s/deployments/products-app.yml | sponge k8s/deployments/products-app.yml
           echo "Aplicando Kustomization (todos os manifestos)..."
           kubectl apply -k k8s/
