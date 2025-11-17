@@ -90,7 +90,7 @@ jobs:
       - name: 2. Configurar Kubectl para EKS
         uses: aws-actions/configure-aws-kubectl@v1
         with:
-          cluster-name: SEU-CLUSTER-EKS
+          cluster-name: soat-infra-eks
       - name: 3. Aplicar o Deploy no EKS
         env:
           IMAGE_URI: ${{ needs.build_and_push_ecr.outputs.image_uri }}
