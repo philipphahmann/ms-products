@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-app
+  namespace: products
+spec:
+  type: LoadBalancer # Exposto externamente (via AWS Load Balancer)
+  selector:
+    app: products-app # Aponta para o Deployment 'products-app'
+  ports:
+    - protocol: TCP
+      port: 80 # Porta do Load Balancer
+      targetPort: 8080 # Porta do container

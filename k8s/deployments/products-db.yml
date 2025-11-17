@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-db
+  namespace: products
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: products-db
+  template:
+    metadata:
+      labels:
+        app: products-db
+    spec:
+      containers:
+        - name: products-db
+          image: postgres:15-alpine # Mesma imagem do docker-compose
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: products-db-config # Carrega o nome do banco
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: products-db-secret
+                  key: DB_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: products-db-secret
+                  key: DB_PASS
+          volumeMounts:
+            - name: products-db-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: products-db-data
+          persistentVolumeClaim:
+            claimName: products-db-pvc # Usa o PVC que definimos

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-app
+  namespace: products
+spec:
+  replicas: 1 # Começa com 1, o HPA cuidará de escalar
+  selector:
+    matchLabels:
+      app: products-app
+  template:
+    metadata:
+      labels:
+        app: products-app
+    spec:
+      containers:
+        - name: ms-products # Nome do container
+          image: $K8S_IMAGE_TAG
+          imagePullPolicy: Always # Sempre baixa a imagem mais recente
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: products-app-config # Carrega perfis e URL do banco
+          env:
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: products-app-secret
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: products-app-secret
+                  key: SPRING_DATASOURCE_PASSWORD
+            - name: SPRING_FLYWAY_USER
+              valueFrom:
+                secretKeyRef:
+                  name: products-app-secret
+                  key: SPRING_FLYWAY_USER
+            - name: SPRING_FLYWAY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: products-app-secret
+                  key: SPRING_FLYWAY_PASSWORD
+          readinessProbe: # Verifica se a app está pronta
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe: # Verifica se a app está "viva"
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 20

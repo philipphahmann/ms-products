@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: products-db
+  namespace: products
+spec:
+  accessModes:
+    - ReadWriteOnce # Volume só pode ser montado por um nó de cada vez
+  resources:
+    requests:
+      storage: 2Gi # 2 Gigabytes (ajuste conforme necessário)
