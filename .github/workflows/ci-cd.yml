@@ -107,9 +107,10 @@ jobs:
           aws-region: us-east-1
 
       - name: 3. Configurar Contexto Kubectl do EKS
-        uses: aws-actions/amazon-eks-cluster-context@v1
+        uses: aws-actions/amazon-eks-update-kubeconfig@v2
         with:
           cluster-name: soat-infra-eks
+          region: us-east-1
 
       - name: 4. Instalar 'gettext' (para envsubst) e 'moreutils' (para sponge)
         run: |
