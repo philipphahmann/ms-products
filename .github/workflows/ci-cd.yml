@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_test_and_analyze
 
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
 
     outputs:
       image_uri_tag: ${{ steps.login-ecr.outputs.registry }}/soat-repo@${{ steps.build-image.outputs.digest }}
@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_and_push_ecr
 
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
 
     steps:
       - name: 1. Checkout do Código
