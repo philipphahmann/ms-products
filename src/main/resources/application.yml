@@ -13,9 +13,9 @@ spring:
   application:
     name: product-service
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/product}
-    username: ${DB_USER:admin}
-    password: ${DB_PASS:123456}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://soat-rds-instance-ms-products.cqcxmf338us8.us-east-1.rds.amazonaws.com:5432/soat}
+    username: ${SPRING_DATASOURCE_USERNAME:soatadmin}
+    password: ${SPRING_DATASOURCE_PASSWORD:123456789}
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: ${DB_SHOW_SQL:true}

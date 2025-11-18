@@ -4,4 +4,4 @@ metadata:
   name: products-app
   namespace: products
 data:
-  DB_URL: ${SOAT_DB_URL}
+  DB_URL: ${SPRING_DATASOURCE_URL}
