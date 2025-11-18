@@ -4,9 +4,4 @@ metadata:
   name: products-app
   namespace: products
 data:
-  # Perfil de produção, sem dependências de outros serviços
-  SPRING_PROFILES_ACTIVE: "prod"
-
-  # URL de conexão (usa o nome do Service 'products-db' e o DB_NAME acima)
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://products-db:5432/products_db"
-  SPRING_FLYWAY_URL: "jdbc:postgresql://products-db:5432/products_db"
+  DB_URL: ${SOAT_DB_URL}

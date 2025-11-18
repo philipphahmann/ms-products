@@ -3,13 +3,8 @@ kind: Kustomization
 
 resources:
   - namespace.yml
-  - configmaps/products-db.yml
   - configmaps/products-app.yml
-  - secrets/products-db.yml
   - secrets/products-app.yml
-  - volumes/products-db.yml
-  - deployments/products-db.yml
   - deployments/products-app.yml
-  - services/products-db.yml
   - services/products-app.yml
   - hpa/products-app.yml

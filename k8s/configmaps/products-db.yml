@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: products-db
-  namespace: products
-data:
-  POSTGRES_DB: ${SOAT_DB_URL}
