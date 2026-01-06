@@ -118,8 +118,9 @@ jobs:
       - name: 5. Aplicar o Deploy no EKS (com envsubst)
         env:
           K8S_IMAGE_TAG: ${{ needs.build_and_push_ecr.outputs.image_uri_digest }}
-          DB_USER_B64: ${{ secrets.DB_USER_B64 }}
-          DB_PASS_B64: ${{ secrets.DB_PASS_B64 }}
+          SPRING_DATASOURCE_USERNAME: ${{ secrets.DB_USER_B64 }}
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.DB_PASS_B64 }}
+          SPRING_DATASOURCE_URL: "jdbc:postgresql://soat-rds-instance-ms-products.cyxjxfysr67a.us-east-1.rds.amazonaws.com:5432/soat"
         run: |
           set -e
           
@@ -127,7 +128,7 @@ jobs:
           
           kubectl apply -f k8s/namespace.yml
           
-          envsubst < k8s/secrets/products-db.yml | sponge k8s/secrets/products-db.yml
+          envsubst < k8s/configmaps/products-app.yml | sponge k8s/configmaps/products-app.yml
           envsubst < k8s/secrets/products-app.yml | sponge k8s/secrets/products-app.yml
           envsubst < k8s/deployments/products-app.yml | sponge k8s/deployments/products-app.yml
           
