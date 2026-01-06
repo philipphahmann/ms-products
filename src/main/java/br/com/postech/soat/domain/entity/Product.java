@@ -1,6 +1,5 @@
 package br.com.postech.soat.domain.entity;
 
-import br.com.postech.soat.commons.domain.AggregateRoot;
 import br.com.postech.soat.domain.enumtypes.Category;
 import br.com.postech.soat.domain.valueobject.ProductCategory;
 import br.com.postech.soat.domain.valueobject.ProductDescription;
@@ -14,7 +13,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class Product extends AggregateRoot<ProductId> {
+public class Product {
+    private final ProductId id;
     private ProductSKU sku;
     private Boolean active;
     private ProductName name;
@@ -23,14 +23,14 @@ public class Product extends AggregateRoot<ProductId> {
     private ProductImage image;
     private ProductCategory category;
 
-    protected Product(ProductId productId) {
-        super(productId);
+    private Product(ProductId id) {
+        this.id = id;
     }
 
     @Builder
     protected Product(UUID productId, String sku, Boolean active, String name,
                       BigDecimal price, String description, String image, Category category) {
-        super(new ProductId(productId));
+        this.id = new ProductId(productId);
         this.sku = new ProductSKU(sku);
         this.active = active;
         this.name = new ProductName(name);
