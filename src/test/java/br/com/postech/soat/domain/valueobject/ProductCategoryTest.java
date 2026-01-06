@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ProductCategoryTest {
+class ProductCategoryTest {
 
     @Test
     void constructor_whenSkuIsInvalid_shouldThrowInvalidProductCategoryException() {
