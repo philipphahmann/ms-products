@@ -4,10 +4,10 @@ metadata:
   name: products-app
   namespace: products
 spec:
-  type: LoadBalancer # Exposto externamente (via AWS Load Balancer)
+  type: LoadBalancer
   selector:
-    app: products-app # Aponta para o Deployment 'products-app'
+    app: products-app
   ports:
     - protocol: TCP
-      port: 80 # Porta do Load Balancer
-      targetPort: 8080 # Porta do container
+      port: 80
+      targetPort: 8080
