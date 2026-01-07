@@ -1,3 +1,4 @@
+# language: pt
 Funcionalidade: Criação de Produto
   Como um administrador do sistema
   Eu quero cadastrar novos produtos

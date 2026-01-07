@@ -13,5 +13,5 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "br.com.postech.soat.bdd.steps")
-public class CucumberTestRunner {
+public class CucumberRunnerTest {
 }

@@ -31,6 +31,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @CucumberContextConfiguration
 @SpringBootTest
@@ -51,7 +52,6 @@ public class CriarProdutoSteps {
 
     @Dado("que tenho os dados de um novo produto válido")
     public void que_tenho_os_dados_de_um_novo_produto_valido() {
-        // Prepara o DTO de entrada (baseado no OpenAPI gerado)
         requestDto = new PostProductsRequestDto();
         requestDto.setSku("BDD-TEST-001");
         requestDto.setName("X-Burger BDD");
@@ -60,7 +60,6 @@ public class CriarProdutoSteps {
         requestDto.setImage("http://teste.com/img.jpg");
         requestDto.setCategory(ProductCategoryDto.SNACK);
 
-        // Prepara o Mock do UseCase para retornar um produto de domínio válido
         Product productMock = Product.create(
             new ProductSKU(requestDto.getSku()),
             new ProductName(requestDto.getName()),
@@ -83,8 +82,9 @@ public class CriarProdutoSteps {
 
     @Entao("o produto deve ser criado com sucesso")
     public void o_produto_deve_ser_criado_com_sucesso() throws Exception {
-        // O MockMvc já validou a execução, aqui poderíamos checar o corpo se necessário
-        // Como o UseCase está mockado, garantimos que o fluxo passou pelo Controller corretamente
+        resultActions
+         .andExpect(jsonPath("$.sku").value("BDD-TEST-001"))
+         .andExpect(jsonPath("$.name").value("X-Burger BDD"));
     }
 
     @Entao("o status da resposta deve ser {int} Created")
