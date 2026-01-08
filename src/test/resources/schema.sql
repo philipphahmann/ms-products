@@ -1,1 +1,0 @@
-CREATE DOMAIN IF NOT EXISTS product_category AS VARCHAR(255);
