@@ -87,7 +87,7 @@ Abaixo está a evidência da cobertura atual do projeto:
 
 > A métrica acima reflete a cobertura de linhas e branches analisada durante a última execução da pipeline.
 
-## `` CI/CD e Deploy
+## CI/CD e Deploy
 
 O deploy é automatizado via **GitHub Actions** (`.github/workflows/ci-cd.yml`) com as seguintes etapas:
 
