@@ -26,6 +26,12 @@
         <sonar.projectKey>philipphahmann_ms-products</sonar.projectKey>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <spring-cloud.version>2024.0.0</spring-cloud.version>
+        <sonar.coverage.exclusions>
+            **/br/com/postech/soat/openapi/**,
+            **/br/com/postech/soat/commons/**,
+            **/br/com/postech/soat/ProductServiceApplication.java,
+            **/br/com/postech/soat/infrastructure/http/*MapperImpl.java
+        </sonar.coverage.exclusions>
     </properties>
 
     <dependencyManagement>
